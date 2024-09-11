@@ -1,0 +1,5 @@
+$app-font-family: 'SUSE', system-ui;
+
+@use 'vuetify' with (
+  $body-font-family: $app-font-family
+);
