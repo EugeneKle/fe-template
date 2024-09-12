@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores'
+
 defineOptions({
   inheritAttrs: false
 })
+
+const authStore = useAuthStore()
 </script>
 <template>
   <v-menu open-on-hover :close-on-content-click="false" width="280">
@@ -20,7 +24,7 @@ defineOptions({
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn variant="text" color="primary">Logout</v-btn>
+        <v-btn variant="text" color="primary" @click="authStore.logout">Logout</v-btn>
       </v-card-actions>
     </v-card>
   </v-menu>

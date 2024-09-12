@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container>
+    <v-container class="fill-height">
       <router-view #="{ Component, route }">
         <v-fade-transition hide-on-leave>
           <component :is="Component" :key="route.path" />
