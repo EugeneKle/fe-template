@@ -1,5 +1,5 @@
-import { useUserStore } from '@/stores'
-import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore, useUserStore } from '@/stores'
+import { createRouter, createWebHistory, type RouteLocationNormalizedGeneric } from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,12 +41,27 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to) => {
+async function checkAuth(to: RouteLocationNormalizedGeneric) {
+  const authStore = useAuthStore()
   const userStore = useUserStore()
 
-  if (!userStore.user && to.name !== 'AuthPage') {
-    return { name: 'AuthPage' }
+  if (!authStore.token && to.name !== 'AuthPage') {
+    const isLoggedIn = await authStore.relogin()
+
+    if (!isLoggedIn) {
+      return { name: 'AuthPage' }
+    }
   }
+
+  if (userStore.user || to.name === 'AuthPage') {
+    return true
+  }
+
+  return { name: 'AuthPage' }
+}
+
+router.beforeEach((to) => {
+  void checkAuth(to)
 })
 
 export default router

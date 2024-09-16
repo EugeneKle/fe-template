@@ -8,4 +8,5 @@ export interface User {
   phone: string
   roles: UserRole[]
   password: string
+  token: string
 }
