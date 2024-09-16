@@ -8,7 +8,8 @@ const admin: User = {
   email: 'john.doe@example.com',
   phone: '+420 775 236 273',
   roles: ['Admin'],
-  password: 'admin1234'
+  password: 'admin1234',
+  token: 'admin_token'
 }
 
 const user: User = {
@@ -18,7 +19,8 @@ const user: User = {
   email: 'jane.smith@example.com',
   phone: '+420 773 242 323',
   roles: ['User'],
-  password: 'user1234'
+  password: 'user1234',
+  token: 'user_token'
 }
 
 export const users = new Map<User['id'], User>([
